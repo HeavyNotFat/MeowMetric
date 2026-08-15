@@ -92,6 +92,13 @@ pip install -r requirements.txt
 ```
 
 ### 3. 配置
+从 Ollama 下载模型
+可以使用开发者训练的模型 MiniMath（早期阶段）
+
+```bash
+ollama pull pysakura0000/minimath
+```
+
 编辑 `resources/config.json`：
 ```json
 {
