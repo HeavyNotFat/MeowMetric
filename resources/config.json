@@ -1,0 +1,8 @@
+{
+  "language": "zh_CN",
+  "cloud_api_base_url": "https://llm-jn340suvk2fasqy3.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
+  "cloud_api_key": "sk-ws-H.EERDMEH.vDEN.MEUCIG0kxOC7TX9gfu1rWrOP71gcfxJO1INz6nY0eLisyHWkAiEAstTZvGAifOQtN2pxeYsE3kPuUAA5-UEHRCYzjDhEZ_Q",
+  "model_request": "http://localhost:5000",
+  "cloud_model": "qwen3.7-flash",
+  "embed_model": "qwen3-embedding:4b"
+}

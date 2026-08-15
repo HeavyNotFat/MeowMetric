@@ -1,0 +1,224 @@
+# English translations for MeowMetric.
+# Copyright (C) 2026 关注塔菲喵
+# FIRST AUTHOR [pysakura0000@qq.com](mailto:pysakura0000@qq.com), 2026.
+msgid ""
+msgstr ""
+"Project-Id-Version: MeowMetric 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/HeavyNotFat\n"
+"POT-Creation-Date: 2026-08-11 07:55+0800\n"
+"PO-Revision-Date: 2026-08-15 00:35+0800\n"
+"Last-Translator: Zhang Jiaqi [pysakura0000@qq.com](mailto:pysakura0000@qq.com)\n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.9\n"
+
+msgid "ui.title"
+msgstr "MeowMetric"
+
+msgid "ui.analysis_done"
+msgstr "Analysis completed. Please go to the \"Statistics\" page to view the results."
+
+# Dashboard
+msgid "ui.sub.dashboard"
+msgstr "Statistics"
+
+msgid "ui.sub.dashboard.average_score"
+msgstr "Average Score"
+
+msgid "ui.sub.dashboard.pass_rate"
+msgstr "Pass Rate"
+
+msgid "ui.sub.dashboard.highest_score"
+msgstr "Highest Score"
+
+msgid "ui.sub.dashboard.total_students"
+msgstr "Total Students"
+
+msgid "ui.sub.dashboard.passed"
+msgstr "Passed"
+
+msgid "ui.sub.dashboard.failed"
+msgstr "Failed"
+
+msgid "ui.sub.dashboard.score_trend"
+msgstr "Score Trend"
+
+msgid "ui.sub.dashboard.score_distribution"
+msgstr "Score Distribution"
+
+msgid "ui.sub.dashboard.pass_status"
+msgstr "Pass Statistics"
+
+msgid "ui.sub.dashboard.score_heatmap"
+msgstr "Score Heatmap"
+
+# Transcript
+msgid "ui.sub.transcript"
+msgstr "Transcript"
+
+msgid "ui.sub.transcript.import"
+msgstr "Import"
+
+msgid "ui.sub.transcript.filepath"
+msgstr "File Path"
+
+msgid "ui.sub.transcript.analysis"
+msgstr "Analyze"
+
+msgid "ui.sub.transcript.analysis.title"
+msgstr "Analysis Panel"
+
+msgid "ui.sub.transcript.analysis.grade_analysis"
+msgstr "Grade Analysis"
+
+msgid "ui.sub.transcript.analysis.grade_field"
+msgstr "Grade Field"
+
+msgid "ui.sub.transcript.analysis.read_sheet"
+msgstr "Read Cell"
+
+msgid "ui.sub.transcript.analysis.input_fullmarks"
+msgstr "Please enter the full score"
+
+# Exam Paper Analysis
+msgid "ui.sub.file_analysis.paper"
+msgstr "Exam Paper"
+
+msgid "ui.sub.file_analysis"
+msgstr "AI Exam Paper Analysis"
+
+msgid "ui.sub.file_analysis.desc"
+msgstr "Upload an exam paper file for analysis. The AI will automatically identify questions, knowledge points, difficulty, and competency levels."
+
+msgid "ui.sub.file_analysis.select_file_holder"
+msgstr "Please select a PNG or PDF exam paper file"
+
+msgid "ui.sub.file_analysis.choose"
+msgstr "Choose File"
+
+msgid "ui.sub.file_analysis.ai_config"
+msgstr "② AI Analysis Configuration"
+
+msgid "ui.sub.file_analysis.non-chosen_file"
+msgstr "No exam paper selected"
+
+msgid "ui.sub.file_analysis.local_ai"
+msgstr "Local AI Model"
+
+msgid "ui.sub.file_analysis.cloud_ai"
+msgstr "Cloud AI Model"
+
+msgid "ui.sub.file_analysis.ai_model"
+msgstr "AI Model"
+
+msgid "ui.sub.file_analysis.start_analysis"
+msgstr "Start AI Analysis"
+
+msgid "ui.sub.file_analysis.progress"
+msgstr "Analysis Progress"
+
+msgid "ui.sub.file_analysis.waiting"
+msgstr "Waiting for Analysis"
+
+msgid "ui.sub.file_analysis.ai_analysis_result"
+msgstr "③ AI Analysis Results"
+
+msgid "ui.sub.file_analysis.file_sb"
+msgstr "Exam Questions"
+
+msgid "ui.sub.file_analysis.ai_ess"
+msgstr "AI Summary"
+
+msgid "ui.sub.file_analysis.analysis_tips"
+msgstr ""
+"Analysis has not started yet.\n"
+"\n"
+"After uploading an exam paper, click \"Start AI Analysis\" and the system will automatically generate an analysis report."
+
+msgid "ui.sub.file_analysis.file_ok"
+msgstr "Exam paper is ready. You can start the analysis."
+
+msgid "ui.sub.file_analysis.one_file_required"
+msgstr "Please select an exam paper file first."
+
+msgid "ui.sub.file_analysis.analysing"
+msgstr "Analyzing..."
+
+msgid "ui.sub.file_analysis.analysis_finished"
+msgstr "Analysis completed!"
+
+msgid "ui.sub.file_analysis.point"
+msgstr "Knowledge Point"
+
+msgid "ui.sub.file_analysis.difficulty"
+msgstr "Difficulty"
+
+msgid "ui.sub.file_analysis.correction"
+msgstr "Correctness"
+
+msgid "ui.sub.file_analysis.comment"
+msgstr "AI Evaluation"
+
+msgid "ui.sub.file_analysis.no_answer"
+msgstr "No Answer"
+
+msgid "ui.sub.file_analysis.local_model_name"
+msgstr "Local Model:"
+
+msgid "ui.sub.file_analysis.cloud_model_name"
+msgstr "Cloud Model:"
+
+msgid "ui.sub.file_analysis.cloud_model_holder"
+msgstr "Please input cloud model."
+
+# Settings
+msgid "ui.sub.settings"
+msgstr "Settings"
+
+msgid "ui.sub.settings.language"
+msgstr "Language:"
+
+msgid "ui.sub.settings.cloud_api_base_url"
+msgstr "AI Base URL:"
+
+msgid "ui.sub.settings.cloud_api_key"
+msgstr "AI API Key:"
+
+msgid "ui.sub.settings.local_api_url"
+msgstr "Local API Addr Routers"
+
+msgid "ui.sub.settings.cloud_model_edit"
+msgstr "Cloud Model"
+
+msgid "ui.sub.settings.embed_model"
+msgstr "Embedding Model"
+
+msgid "ui.sub.settings.save"
+msgstr "Save"
+
+msgid "ui.sub.settings.save_failed"
+msgstr "Save Failed"
+
+msgid "ui.sub.settings.save_success"
+msgstr "Saved Successfully"
+
+# Documents
+msgid "ui.sub.documents"
+msgstr "Documents"
+
+# Q&A
+msgid "ui.sub.question"
+msgstr "AI Assistant"
+
+msgid "ui.sub.question.placeholder"
+msgstr "Enter your question"
+
+msgid "ui.sub.question.send"
+msgstr "Send"
+
+msgid "ui.error"
+msgstr "Error"

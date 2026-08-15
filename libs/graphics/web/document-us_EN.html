@@ -1,0 +1,152 @@
+<style>
+	body {
+	    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+	    font-size: 14px;
+	    line-height: 1.7;
+	    color: #2c3e50;
+	    padding: 4px 8px;
+	}
+
+	h1 {
+	    font-size: 19px;
+	    font-weight: 600;
+	    color: #1a1a1a;
+	    border-left: 4px solid #3498db;
+	    padding: 4px 0 4px 10px;
+	    margin-top: 28px;
+	    margin-bottom: 12px;
+	    background-color: #f7f9fb;
+	}
+
+	h1:first-child {
+	    margin-top: 4px;
+	}
+
+	h3 {
+	    font-size: 14.5px;
+	    font-weight: 600;
+	    color: #34495e;
+	    margin-top: 16px;
+	    margin-bottom: 8px;
+	}
+
+	code {
+	    background-color: #eef1f5;
+	    padding: 2px 7px;
+	    border-radius: 4px;
+	    font-family: Consolas, Menlo, monospace;
+	    font-size: 13px;
+	    color: #c7254e;
+	}
+
+	pre {
+	    background-color: #f5f6f8;
+	    border: 1px solid #e1e4e8;
+	    border-radius: 6px;
+	    padding: 10px 14px;
+	    margin: 8px 0 16px 0;
+	}
+
+	pre code {
+	    background-color: transparent;
+	    padding: 0;
+	    color: #2c3e50;
+	}
+
+	table {
+	    border-collapse: collapse;
+	    margin-top: 10px;
+	    margin-bottom: 18px;
+	    width: auto;
+	}
+
+	th, td {
+	    border: 1px solid #dfe3e8;
+	    padding: 7px 16px;
+	    text-align: center;
+	}
+
+	th {
+	    background-color: #eef1f5;
+	    color: #34495e;
+	    font-weight: 600;
+	}
+
+	tr:nth-child(even) td {
+	    background-color: #fafbfc;
+	}
+
+	p {
+	    margin: 6px 0;
+	}
+
+	ol, ul {
+	    margin: 6px 0 16px 0;
+	    padding-left: 22px;
+	}
+
+	li {
+	    margin: 4px 0;
+	}
+
+	.badge {
+	    display: inline-block;
+	    background-color: #3498db;
+	    color: #ffffff;
+	    font-size: 12px;
+	    font-weight: 600;
+	    padding: 2px 8px;
+	    border-radius: 3px;
+	    margin-right: 6px;
+	}
+
+	.badge-post {
+	    background-color: #27ae60;
+	}
+
+	.note {
+	    background-color: #fff8e6;
+	    border-left: 4px solid #f1c40f;
+	    padding: 8px 12px;
+	    margin: 10px 0 16px 0;
+	    border-radius: 2px;
+	    color: #7a6110;
+	}
+</style>
+<h1>Local AI API URL Local Routing</h1>
+<p><span class="badge badge-post">POST</span><span class="badge">SSE Format</span></p>
+<h3>SSE Format</h3>
+<table>
+	<tr>
+		<th>Field</th>
+		<th>Type</th>
+		<th>Value</th>
+	</tr>
+	<tr>
+		<td>type</td>
+		<td>String</td>
+		<td>error, content</td>
+	</tr>
+</table>
+<h1>Cloud AI API URL Local Routing</h1>
+<p><span class="badge badge-post">POST</span></p>
+<h1>Embedding Models</h1>
+<p><code>Ollama</code></p>
+<p> Text embedding models, such as <code>BGE-M3</code>, <code>nomic-embed-text</code>, and <code>jina-embeddings-v2</code>. </p>
+<p>Pull the required model using the following command:</p>
+<pre><code>ollama pull <model></code></pre>
+<h1>Adding a New Language</h1>
+<p>The project uses <code>.po</code> files to manage multilingual text. All language files are stored in:</p>
+<pre><code>resources/languages</code></pre>
+<p>To add a new language:</p>
+<ol>
+	<li>Navigate to the <code>resources/languages</code> directory and copy an existing <code>.mo</code> file as a template.</li>
+	<li>Rename the file according to the target language (for example, <code>en_US.mo</code> or <code>ja_JP.mo</code>).</li>
+	<li>Open the file with a text editor or a PO editor (such as Poedit) and translate the <code>msgstr</code> entries.</li>
+	<li>Save the file.</li>
+	<li>Add the corresponding local language mapping in <code>libs/graphics/settings.py</code>.</li>
+	<li>Create <code>libs/graphics/wen/document-{language}.html</code>, where <code>{language}</code> matches the .mo file name. The content inside need to be translated.</li>
+    <li>Create <code>resources/prompts/prompts-{language}.json</code>, where <code>{language}</code> matches the .mo file name.，The prompt inside need to be translated.</li>
+
+</ol>
+<div class="note"> Note: <code>msgid</code> is the original key and must not be modified. Only translate the corresponding <code>msgstr</code> values. </div>

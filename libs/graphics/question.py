@@ -1,200 +1,42 @@
 import itertools
 import json
 
-from PyQt5.QtCore import Qt, pyqtSignal, QTimer, QUrl
 from PyQt5.QtWidgets import (
+    QComboBox,
     QWidget,
     QVBoxLayout,
     QHBoxLayout,
     QLineEdit,
     QFrame,
-    QGraphicsDropShadowEffect,
 )
-from PyQt5.Qt import QColor
+from PyQt5.Qt import Qt, pyqtSignal, pyqtSlot, QObject, QTimer, QUrl
+from PyQt5.QtWebChannel import QWebChannel
 from PyQt5.QtWebEngineWidgets import QWebEngineView
 
 from .. import defer
 from .. import get_translation
 from .. import ui
+from .. import DataMemShared
+
+with open("./libs/graphics/web/question.html", "r", encoding="utf-8") as f:
+    _chat_html = f.read()
+    f.close()
 
 
-_MATHJAX_SRC = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"
+class _ScrollBridge(QObject):
+    """
+    接收 JS 侧滚动通知，转发为 Qt 端的一次强制重绘。
 
-_CHAT_HTML = r"""<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <script>
-        window.MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\\\(', '\\\\)']],
-                displayMath: [['$$', '$$'], ['\\\\[', '\\\\]']]
-            },
-            svg: { fontCache: 'global' },
-            startup: {
-                pageReady() {
-                    return MathJax.startup.defaultPageReady().then(function () {
-                        window.dispatchEvent(new Event('MathJaxReady'));
-                });
-            }
-        }
-    };
-    </script>
-    <script src="mathjax_src" id="MathJax-script" async></script>
-    <style>
-    html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        background: transparent;
-        font-family: -apple-system, "Microsoft YaHei", "PingFang SC", sans-serif;
-        font-size: 13px;
-        overflow: hidden;
-    }
-    #container {
-        height: 100vh;
-        box-sizing: border-box;
-        padding: 16px;
-        display: flex;
-        flex-direction: column;
-        overflow-y: auto;
-        transform: translateZ(0);
-        will-change: transform;
-        hange: transform;
-    }
-    .row {
-        display: flex;
-        margin: 4px 0;
-        }
-    .row.user { justify-content: flex-end; }
-    .row.ai { justify-content: flex-start; }
-    
-    .bubble {
-        max-width: 480px;
-        padding: 10px 14px;
-        border-radius: 10px;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-        line-height: 1.5;
-    }
-    .bubble.user {
-        background-color: #3498db;
-        color: #ffffff;
-        }
-    .bubble.ai {
-        background-color: #ffffff;
-        border: 1px solid #ecf0f1;
-        color: #2c3e50;
-    }
-    .bubble code, .bubble pre {
-        background: rgba(0, 0, 0, 0.06);
-        border-radius: 4px;
-        padding: 1px 4px;
-        font-family: Consolas, "Courier New", monospace;
-    }
-    .bubble.thinking {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        padding: 14px 16px;
-    }
-    .bubble.thinking .dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background-color: #bdc3c7;
-        animation: thinking-bounce 1.4s infinite ease-in-out both;
-    }
-    .bubble.thinking .dot:nth-child(1) { animation-delay: -0.32s; }
-    .bubble.thinking .dot:nth-child(2) { animation-delay: -0.16s; }
-    @keyframes thinking-bounce {
-        0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; }
-        40% { transform: scale(1); opacity: 1; }
-    }
-    :-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-thumb {
-        background: rgba(0, 0, 0, 0.15);
-        border-radius: 4px;
-    }
-    ::-webkit-scrollbar-track { background: transparent; }
-    </style>
-</head>
-<body>
-    <div id="container"></div>
-    <script>
-    var container = document.getElementById('container');
+    流式回复时之所以不会出现叠影，是因为每次 DOM 变化都会逼着
+    Chromium 把新帧完整同步给 Qt backing store；纯滚动
+    """
+    def __init__(self, chat_view, parent=None):
+        super().__init__(parent)
+        self._chat_view = chat_view
 
-    function escapeHtml(s) {
-        var d = document.createElement('div');
-        d.textContent = s;
-        return d.innerHTML;
-    }
-    
-    function scrollToBottom() {
-        container.scrollTop = container.scrollHeight;
-    }
-    
-    function typesetAndScroll(el) {
-        if (window.MathJax && window.MathJax.typesetPromise) {
-            MathJax.typesetPromise([el]).then(scrollToBottom).catch(scrollToBottom);
-        } else {
-            window.addEventListener('MathJaxReady', function once() {
-            window.removeEventListener('MathJaxReady', once);
-            MathJax.typesetPromise([el]).then(scrollToBottom).catch(scrollToBottom);
-        });
-            scrollToBottom();
-        }
-    }
-
-    function addThinking(id) {
-        var row = document.createElement('div');
-        row.className = 'row ai';
-        
-        var bubble = document.createElement('div');
-        bubble.id = id;
-        bubble.className = 'bubble ai thinking';
-        bubble.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
-        
-        row.appendChild(bubble);
-        container.appendChild(row);
-        scrollToBottom();
-    }
-        
-    function setMessage(id, text) {
-        var bubble = document.getElementById(id);
-        if (!bubble) { return; }
-        bubble.classList.remove('thinking');
-        bubble.innerHTML = escapeHtml(text).replace(/\n/g, '<br>');
-        typesetAndScroll(bubble);
-    }
-        
-    function addMessage(id, text, isUser) {
-        var row = document.createElement('div');
-        row.className = 'row ' + (isUser ? 'user' : 'ai');
-        
-        var bubble = document.createElement('div');
-        bubble.id = id;
-        bubble.className = 'bubble ' + (isUser ? 'user' : 'ai');
-        bubble.innerHTML = escapeHtml(text).replace(/\\n/g, '<br>');
-        
-        row.appendChild(bubble);
-        container.appendChild(row);
-        typesetAndScroll(bubble);
-    }
-
-    function setMessage(id, text) {
-        var bubble = document.getElementById(id);
-        if (!bubble) { return; }
-        bubble.classList.remove('thinking');
-        bubble.innerHTML = escapeHtml(text).replace(/\n/g, '<br>');
-        typesetAndScroll(bubble);
-    }
-    </script>
-</body>
-</html>
-"""
-_CHAT_HTML = _CHAT_HTML.replace("mathjax_src", _MATHJAX_SRC)
-
+    @pyqtSlot()
+    def notify_scroll(self):
+        self._chat_view.update()
 
 
 class ChatView(QWebEngineView):
@@ -208,8 +50,13 @@ class ChatView(QWebEngineView):
         self.page().setBackgroundColor(Qt.transparent)
         self.setContextMenuPolicy(Qt.NoContextMenu)
 
+        self._scroll_bridge = _ScrollBridge(self)
+        self._channel = QWebChannel(self.page())
+        self._channel.registerObject('bridge', self._scroll_bridge)
+        self.page().setWebChannel(self._channel)
+
         self.loadFinished.connect(self._on_load_finished)
-        self.setHtml(_CHAT_HTML, QUrl("about:blank"))
+        self.setHtml(_chat_html, QUrl("about:blank"))
 
     def _on_load_finished(self, ok: bool):
         self._loaded = True
@@ -245,8 +92,9 @@ class QuestionWidget(ui.PageWidget):
     # 流式回复时，把多次 append 节流合并成一次渲染的间隔（毫秒）。
     _STREAM_THROTTLE_MS = 80
 
-    def __init__(self):
+    def __init__(self, parent):
         super().__init__(get_translation("ui.sub.question"))
+        self.parent = parent
         self.add_widget(self._build_message_area(), stretch=1)
         self.add_widget(self._build_input_area())
 
@@ -259,30 +107,46 @@ class QuestionWidget(ui.PageWidget):
         self._render_timer.setInterval(self._STREAM_THROTTLE_MS)
         self._render_timer.timeout.connect(self._flush_streaming)
 
+    def recv_generative_models(self, result: str):
+        if self.model_combo.currentText().strip() == "Loading...": self.model_combo.clear()
+        self.model_combo.addItem(result)
+        DataMemShared.generative_models.append(result)
+        self.parent.file_analysis_page.add_generative_models(result)
+
+    def recv_embedding_models(self, result: str):
+        DataMemShared.embedding_models.append(result)
+        self.parent.setting_page.add_embedding_model(result)
+
     def _build_message_area(self) -> QWidget:
-        card = QFrame()
-        card.setProperty("class", "card")
-        card.setStyleSheet(
-            "QFrame { background-color: #ffffff; border-radius: 10px; }"
-        )
-        shadow = QGraphicsDropShadowEffect(card)
-        shadow.setBlurRadius(12)
-        shadow.setColor(QColor(0, 0, 0, 25))
-        shadow.setOffset(0, 2)
-        card.setGraphicsEffect(shadow)
+        wrapper = QFrame()
+        wrapper.setStyleSheet("""
+            QFrame {
+                background-color: #ffffff;
+                border-radius: 10px;
+                border: 1px solid rgba(0, 0, 0, 15%);
+            }
+        """)
+        layout = QVBoxLayout(wrapper)
+        layout.setContentsMargins(0, 0, 0, 0)
 
-        card_layout = QVBoxLayout(card)
-        card_layout.setContentsMargins(0, 0, 0, 0)
-
-        self.chat_view = ChatView(card)
-        card_layout.addWidget(self.chat_view)
-        return card
+        self.chat_view = ChatView(wrapper)
+        layout.addWidget(self.chat_view)
+        return wrapper
 
     def _build_input_area(self) -> QWidget:
         container = QWidget()
         row = QHBoxLayout(container)
         row.setContentsMargins(0, 0, 0, 0)
         row.setSpacing(10)
+
+        self.model_combo = QComboBox()
+        self.model_combo.addItem("Loading...")
+        self.model_combo.setFixedWidth(180)
+
+        t = defer.GetModelList(self)
+        t.generative_models.connect(self.recv_generative_models)
+        t.embedding_models.connect(self.recv_embedding_models)
+        t.start()
 
         self.input_edit = QLineEdit()
         self.input_edit.setPlaceholderText(
@@ -295,12 +159,15 @@ class QuestionWidget(ui.PageWidget):
         self.send_button.setCursor(Qt.PointingHandCursor)
         self.send_button.clicked.connect(self._on_send)
 
+        row.addWidget(self.model_combo)
         row.addWidget(self.input_edit, stretch=1)
         row.addWidget(self.send_button)
+
         return container
 
     def recv_message(self, result):
-        """流式分片回调：同一条 AI 回复的多个分片会被拼进同一个气泡里，
+        """
+        流式分片回调：同一条 AI 回复的多个分片会被拼进同一个气泡里，
         而不是每个分片新建一条消息。渲染做了节流，不会每个分片都触发一次
         MathJax 排版。
         """
@@ -317,6 +184,7 @@ class QuestionWidget(ui.PageWidget):
     def _flush_streaming(self):
         if self._streaming_id is not None:
             self.chat_view.set_message(self._streaming_id, self._streaming_text)
+            self.chat_view.update()
 
     def finish_recv(self):
         """AI 回复全部分片接收完毕。"""
@@ -326,12 +194,15 @@ class QuestionWidget(ui.PageWidget):
 
     def _on_send(self):
         text = self.input_edit.text().strip()
-        if not text:
+        model = self.model_combo.currentText()
+        if (not text) or (not model.strip()):
             return
-        t = defer.AICallBack(text, self)
+
+        t = defer.AICallBack(text, model, self)
         t.finished.connect(self.finish_recv)
         t.result.connect(self.recv_message)
         t.start()
+
         self.add_message(text, is_user=True)
         self.input_edit.clear()
 

@@ -21,14 +21,7 @@ class TranscriptWidget(ui.PageWidget):
         button_layout = QHBoxLayout()
         self.import_btn = ui.PushButton(get_translation("ui.sub.transcript.import"), self)
         self.import_btn.clicked.connect(self.import_transcript)
-        # self.analysis_btn = ui.PushButton(get_translation("ui.sub.transcript.analysis"), self)
-        # self.analysis_btn.clicked.connect(self.analysis_grades)
-        # self.select_subject = QComboBox(self)
-        # self.select_subject.addItems([get_translation("sb.chinese"),get_translation("sb.english"),get_translation("sb.math"),
-        #                               get_translation("sb.physics"),get_translation("sb.chemistry"),get_translation("sb.biology"),
-        #                               get_translation("sb.history"),get_translation("sb.politics"),get_translation("sb.geography")])
         button_layout.addWidget(self.import_btn)
-        # button_layout.addWidget(self.analysis_btn)
         self.add_layout(button_layout)
 
         self.transcript_table = QTableWidget()

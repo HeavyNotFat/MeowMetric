@@ -1,0 +1,161 @@
+<style>
+    body {
+        font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+        font-size: 14px;
+        line-height: 1.7;
+        color: #2c3e50;
+        padding: 4px 8px;
+    }
+
+    h1 {
+        font-size: 19px;
+        font-weight: 600;
+        color: #1a1a1a;
+        border-left: 4px solid #3498db;
+        padding: 4px 0 4px 10px;
+        margin-top: 28px;
+        margin-bottom: 12px;
+        background-color: #f7f9fb;
+    }
+
+    h1:first-child {
+        margin-top: 4px;
+    }
+
+    h3 {
+        font-size: 14.5px;
+        font-weight: 600;
+        color: #34495e;
+        margin-top: 16px;
+        margin-bottom: 8px;
+    }
+
+    code {
+        background-color: #eef1f5;
+        padding: 2px 7px;
+        border-radius: 4px;
+        font-family: Consolas, Menlo, monospace;
+        font-size: 13px;
+        color: #c7254e;
+    }
+
+    pre {
+        background-color: #f5f6f8;
+        border: 1px solid #e1e4e8;
+        border-radius: 6px;
+        padding: 10px 14px;
+        margin: 8px 0 16px 0;
+    }
+
+    pre code {
+        background-color: transparent;
+        padding: 0;
+        color: #2c3e50;
+    }
+
+    table {
+        border-collapse: collapse;
+        margin-top: 10px;
+        margin-bottom: 18px;
+        width: auto;
+    }
+
+    th, td {
+        border: 1px solid #dfe3e8;
+        padding: 7px 16px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #eef1f5;
+        color: #34495e;
+        font-weight: 600;
+    }
+
+    tr:nth-child(even) td {
+        background-color: #fafbfc;
+    }
+
+    p {
+        margin: 6px 0;
+    }
+
+    ol, ul {
+        margin: 6px 0 16px 0;
+        padding-left: 22px;
+    }
+
+    li {
+        margin: 4px 0;
+    }
+
+    .badge {
+        display: inline-block;
+        background-color: #3498db;
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 2px 8px;
+        border-radius: 3px;
+        margin-right: 6px;
+    }
+
+    .badge-post {
+        background-color: #27ae60;
+    }
+
+    .note {
+        background-color: #fff8e6;
+        border-left: 4px solid #f1c40f;
+        padding: 8px 12px;
+        margin: 10px 0 16px 0;
+        border-radius: 2px;
+        color: #7a6110;
+    }
+</style>
+
+<h1>本地 AI API URL 本地路由</h1>
+<p><span class="badge badge-post">POST</span><span class="badge">SSE Format</span></p>
+
+<h3>SSE Format</h3>
+<table>
+    <tr>
+        <th>字段</th>
+        <th>类型</th>
+        <th>值</th>
+    </tr>
+    <tr>
+        <td>type</td>
+        <td>String</td>
+        <td>error, content</td>
+    </tr>
+</table>
+
+<h1>云端 AI API URL 本地路由</h1>
+<p><span class="badge badge-post">POST</span></p>
+
+<h1>嵌入模型</h1>
+<p><code>Ollama</code></p>
+<p>
+    文本嵌入模型，比如 <code>BGE-M3</code>、<code>nomic-embed-text</code>、
+    <code>jina-embeddings-v2</code>
+</p>
+<p>需要使用以下命令进行拉取：</p>
+<pre><code>ollama pull &lt;model&gt;</code></pre>
+
+<h1>增加语言</h1>
+<p>项目使用 <code>.mo</code> 文件管理多语言文本，语言文件统一存放在：</p>
+<pre><code>resources/languages</code></pre>
+<p>添加一门新语言的步骤如下：</p>
+<ol>
+    <li>进入 <code>resources/languages</code> 目录，复制一份已有的 <code>.po</code> 文件作为模板；</li>
+    <li>将文件重命名为目标语言对应的名称（例如 <code>en_US.mo</code>、<code>ja_JP.mo</code>）；</li>
+    <li>使用文本编辑器或 PO 编辑工具（如 Poedit）打开文件，翻译其中的 <code>msgstr</code> 字段；</li>
+    <li>保存文件</li>
+    <li><code>libs/graphics/settings.py</code> 文件中需要增加本地语言映射。</li>
+    <li>需要创建 <code>libs/graphics/web/document-{language}.html</code> 其中language需要和 .mo 文件名相同，其中内容也需要翻译</li>
+    <li>需要创建 <code>resources/prompts/prompts-{language}.json</code> 其中language需要和 .mo 文件名相同，其中提示词也需要翻译</li>
+</ol>
+<div class="note">
+    注意：<code>msgid</code> 是原文键值，不能修改；只需要填写对应的 <code>msgstr</code> 翻译内容即可。
+</div>

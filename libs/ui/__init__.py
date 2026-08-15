@@ -412,6 +412,8 @@ class MeowMetricProbe(QMainWindow):
 
         # 导航数据
         self._nav_items: list[tuple[str, QWidget, QPushButton]] = []  # [(text, page_widget, nav_button), ...]
+        self._top_buttons: list[QPushButton] = []
+        self._bottom_buttons: list[QPushButton] = []
 
         # 主容器
         container = QWidget()
@@ -463,7 +465,7 @@ class MeowMetricProbe(QMainWindow):
         self.body_layout.addWidget(right_panel, stretch=1)
         main_layout.addWidget(body)
 
-    def add_interface(self, icon_text: str, page: PageWidget):
+    def add_interface(self, icon_text: str, page: PageWidget, pos: str = "top"):
         """
         添加导航项和对应页面
 
@@ -478,8 +480,11 @@ class MeowMetricProbe(QMainWindow):
         nav_btn.setCheckable(True)
         nav_btn.clicked.connect(lambda _, i=index: self._switch_page(i))
 
-        # 添加到侧边栏
-        self.sidebar_layout.addWidget(nav_btn)
+        if pos == "bottom":
+            self._bottom_buttons.append(nav_btn)
+        else:
+            self._top_buttons.append(nav_btn)
+        self._rebuild_sidebar()
 
         # 添加页面到堆栈
         self.page_stack.addWidget(page)
@@ -490,6 +495,21 @@ class MeowMetricProbe(QMainWindow):
         # 如果是第一个页面，设置为默认
         if index == 0:
             self._switch_page(0)
+
+    def _rebuild_sidebar(self):
+        while self.sidebar_layout.count():
+            item = self.sidebar_layout.takeAt(0)
+            w = item.widget()
+            if w is not None:
+                w.setParent(None)
+
+        for btn in self._top_buttons:
+            self.sidebar_layout.addWidget(btn)
+
+        if self._bottom_buttons:
+            self.sidebar_layout.addStretch(1)
+            for btn in self._bottom_buttons:
+                self.sidebar_layout.addWidget(btn)
 
     def _switch_page(self, index: int):
         """切换到指定页面"""

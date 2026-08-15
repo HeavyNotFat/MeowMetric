@@ -1,155 +1,95 @@
-\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+1. 计算复数 $(1+5\mathrm{i})\mathrm{i}$，并求其虚部。
 
-\item $(1+5\mathrm{i})\mathrm{i}$ 的虚部为
-\begin{enumerate}[label=\textbf{\Alph*.}, leftmargin=*]
-\item $-1$
-\item $0$
-\item $1$
-\item $6$
-\end{enumerate}
-\textbf{答案：C}
+\textbf{解：}
+$(1+5\mathrm{i})\mathrm{i} = \mathrm{i} + 5\mathrm{i}^2 = \mathrm{i} - 5 = -5 + \mathrm{i}$。
+根据复数虚部的定义，该复数的虚部为 $1$。
 
-\item 设全集 $U = \{1,2,3,4,5,6,7,8\}$，集合 $A = \{1,3,5\}$，则 $\complement_U A$ 中元素个数为
-\begin{enumerate}[label=\textbf{\Alph*.}, leftmargin=*]
-\item $0$
-\item $3$
-\item $5$
-\item $8$
-\end{enumerate}
-\textbf{答案：C}
+2. 设全集 $U = \{1,2,3,4,5,6,7,8\}$，集合 $A = \{1,3,5\}$，求 $\complement_U A$ 中元素的个数。
 
-\item 若双曲线 $C$ 的虚轴长为实轴长的 $\sqrt{7}$ 倍，则 $C$ 的离心率为
-\begin{enumerate}[label=\textbf{\Alph*.}, leftmargin=*]
-\item $\sqrt{2}$
-\item $2$
-\item $\sqrt{7}$
-\item $2\sqrt{2}$
-\end{enumerate}
-\textbf{答案：D}
+\textbf{解：}
+由补集的定义可知 $\complement_U A = \{x \in U \mid x \notin A\} = \{2,4,6,7,8\}$。
+因此，$\complement_U A$ 中共有 $5$ 个元素。
 
-\item 若点 $(a,0)\ (a>0)$ 是函数 $y = 2\tan\left(x - \dfrac{\pi}{3}\right)$ 的图象的一个对称中心，则 $a$ 的最小值为
-\begin{enumerate}[label=\textbf{\Alph*.}, leftmargin=*]
-\item $\dfrac{\pi}{6}$
-\item $\dfrac{\pi}{3}$
-\item $\dfrac{\pi}{2}$
-\item $\dfrac{4\pi}{3}$
-\end{enumerate}
-\textbf{答案：C}
+3. 若双曲线 $C$ 的虚轴长为实轴长的 $\sqrt{7}$ 倍，求双曲线 $C$ 的离心率。
 
-\item 设 $f(x)$ 是定义在 $\mathbb{R}$ 上且周期为 2 的偶函数，当 $2 \leqslant x \leqslant 3$ 时，$f(x) = 5 - 2x$，则 $f\left(-\dfrac{3}{4}\right) =$
-\begin{enumerate}[label=\textbf{\Alph*.}, leftmargin=*]
-\item $-\dfrac{1}{2}$
-\item $-\dfrac{1}{4}$
-\item $\dfrac{1}{4}$
-\item $\dfrac{1}{2}$
-\end{enumerate}
-\textbf{答案：A}
+\textbf{解：}
+设双曲线的实半轴长为 $a$，虚半轴长为 $b$，则实轴长为 $2a$，虚轴长为 $2b$。
+由题意得 $2b = \sqrt{7} \cdot 2a$，即 $b = \sqrt{7}\,a$。
+双曲线的离心率公式为 $e = \dfrac{c}{a}$，其中 $c^2 = a^2 + b^2$，故
+$e = \sqrt{1 + \left(\frac{b}{a}\right)^2} = \sqrt{1 + (\sqrt{7})^2} = \sqrt{1 + 7} = \sqrt{8} = 2\sqrt{2}$。
 
-\item 帆船比赛中，运动员可借助风力计测定风速的大小和方向，测出的结果在航海学中称为视风风速，视风风速对应的向量，是真风风速对应的向量与船行风速对应的向量之和，其中船行风速对应的向量与船速对应的向量大小相等，方向相反。图 1 给出了部分风力等级、名称与风速大小的对应关系。已知某帆船运动员在某时刻测得的视风风速对应的向量与船速对应的向量如图 2（风速的大小和向量的大小相同，单位 m/s），则真风为
-\begin{enumerate}[label=\textbf{\Alph*.}, leftmargin=*]
-\item 轻风
-\item 微风
-\item 和风
-\item 劲风
-\end{enumerate}
-\textbf{答案：A}
-\end{enumerate}
+4. 若点 $(a,0)$（其中 $a>0$）是函数 $y = 2\tan\!\left(x - \dfrac{\pi}{3}\right)$ 图象的一个对称中心，求 $a$ 的最小值。
+
+\textbf{解：}
+正切函数 $y = \tan x$ 的对称中心为 $\left(\dfrac{k\pi}{2},\, 0\right)$，$k \in \mathbb{Z}$。
+对于函数 $y = 2\tan\!\left(x - \dfrac{\pi}{3}\right)$，令 $x - \dfrac{\pi}{3} = \dfrac{k\pi}{2}$，$k \in \mathbb{Z}$，
+解得 $x = \dfrac{k\pi}{2} + \dfrac{\pi}{3}$，即对称中心的横坐标为 $a_k = \dfrac{k\pi}{2} + \dfrac{\pi}{3}$。
+要求 $a > 0$ 且取最小值，当 $k = 0$ 时，$a = \dfrac{\pi}{3} > 0$；
+当 $k = -1$ 时，$a = -\dfrac{\pi}{2} + \dfrac{\pi}{3} = -\dfrac{\pi}{6} < 0$，不合题意。
+因此，满足条件的最小正值为 $a = \dfrac{\pi}{3}$。
+
+5. 设 $f(x)$ 是定义在 $\mathbb{R}$ 上且周期为 $2$ 的偶函数，当 $2 \leq x \leq 3$ 时，$f(x) = 5 - 2x$。求 $f\!\left(-\dfrac{3}{4}\right)$ 的值。
+
+\textbf{解：}
+由于 $f(x)$ 是偶函数，故 $f\!\left(-\dfrac{3}{4}\right) = f\!\left(\dfrac{3}{4}\right)$。
+又因 $f(x)$ 周期为 $2$，所以 $f\!\left(\dfrac{3}{4}\right) = f\!\left(\dfrac{3}{4} + 2\right) = f\!\left(\dfrac{11}{4}\right)$。
+注意到 $\dfrac{11}{4} \in [2, 3]$，代入已知表达式得
+$f\!\left(\dfrac{11}{4}\right) = 5 - 2 \times \dfrac{11}{4} = 5 - \dfrac{11}{2} = -\dfrac{1}{2}$。
+因此，$f\!\left(-\dfrac{3}{4}\right) = -\dfrac{1}{2}$。
 
 
-\begin{document}
-\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
-    \item 已知椭圆 $C:\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1\;(a>b>0)$ 的离心率为 $\dfrac{2\sqrt{2}}{3}$，椭圆下顶点为 $A$，右顶点为 $B$，且 $|AB|=\sqrt{10}$。
-
+6. 已知椭圆 $C:\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1\;(a>b>0)$ 的离心率为 $\dfrac{2\sqrt{2}}{3}$，椭圆下顶点为 $A$，右顶点为 $B$，且 $|AB|=\sqrt{10}$。
     （1）求椭圆的标准方程；
 
     （2）已知动点 $P$ 不在 $y$ 轴上，点 $R$ 在射线 $AP$ 上，且满足 $|AP|\cdot|AR|=3$。
+        （i）设 $P(m,n)$，$R(x,y)$，求点 $R$ 的坐标 $(x,y)$ 关于 $m,n$ 的表达式；
+        （ii）设 $O$ 为坐标原点，$Q$ 是 $C$ 上的动点，直线 $OR$ 的斜率是直线 $OP$ 斜率的 $3$ 倍，求 $|PQ|$ 的最大值。
 
-    \quad（i）设 $P(m,n)$，$R(x,y)$，求点 $R$ 的坐标 $(x,y)$ 关于 $m,n$ 的表达式；
+\textbf{解：（1）}
+由题意知 $A(0,-b)$，$B(a,0)$，则
 
-    \quad（ii）设 $O$ 为坐标原点，$Q$ 是 $C$ 上的动点，直线 $OR$ 的斜率是直线 $OP$ 斜率的 $3$ 倍，求 $|PQ|$ 的最大值。
-\end{enumerate}
-
-\noindent\textbf{解：}
-
-\textbf{（1）} 由题意知 $A(0,-b)$，$B(a,0)$，则
-\[
-
-    |AB|=\sqrt{a^2+b^2}=\sqrt{10} \implies a^2+b^2=10. \tag{1}
-\]
+$|AB|=\sqrt{a^2+b^2}=\sqrt{10}$，即 $a^2+b^2=10$。①
 又离心率 $e=\dfrac{c}{a}=\dfrac{2\sqrt{2}}{3}$，故
-\[
-    \frac{c^2}{a^2}=\frac{8}{9} \implies b^2=a^2-c^2=\frac{1}{9}a^2 \implies a^2=9b^2. \tag{2}
-\]
-将 (2) 代入 (1) 得 $10b^2=10$，解得 $b=1$，进而 $a=3$。\\
-故椭圆的标准方程为
-\[
-    \boxed{\frac{x^2}{9}+y^2=1.}
-\]
+$\dfrac{c^2}{a^2}=\dfrac{8}{9}$，即 $b^2=a^2-c^2=\dfrac{1}{9}a^2$，所以 $a^2=9b^2$。②
 
-\textbf{（2）（i）} 因为 $A(0,-1)$，$P(m,n)$，所以 $\overrightarrow{AP}=(m,\,n+1)$。\\
+将 ② 代入 ① 得 $10b^2=10$，解得 $b=1$，进而 $a=3$。
+
+故椭圆的标准方程为 $\boxed{\dfrac{x^2}{9}+y^2=1}$。
+
+
+\textbf{解（2）（i）}
+因为 $A(0,-1)$，$P(m,n)$，所以 $\overrightarrow{AP}=(m,\,n+1)$。
+
 由于 $R$ 在射线 $AP$ 上，可设 $\overrightarrow{AR}=\lambda\overrightarrow{AP}\;(\lambda>0)$，则
-\[
-
-    |AP|\cdot|AR|=|AP|\cdot\lambda|AP|=\lambda|AP|^2=3 \implies \lambda=\frac{3}{m^2+(n+1)^2}.
-\]
+$|AP|\cdot|AR|=|AP|\cdot\lambda|AP|=\lambda|AP|^2=3$，解得 $\lambda=\dfrac{3}{m^2+(n+1)^2}$。
 又 $\overrightarrow{AR}=(x,\,y+1)=\lambda(m,\,n+1)$，故
-\[
-    x=\lambda m=\frac{3m}{m^2+(n+1)^2},\qquad
-    y+1=\lambda(n+1)=\frac{3(n+1)}{m^2+(n+1)^2}.
-\]
-因此点 $R$ 的坐标为
-\[
-    \boxed{
-        \begin{cases}
-            x=\dfrac{3m}{m^2+(n+1)^2},\\[8pt]
-            y=\dfrac{3(n+1)}{m^2+(n+1)^2}-1.
-        \end{cases}
-    }
-\]
+$x=\lambda m=\dfrac{3m}{m^2+(n+1)^2}$，
+$y+1=\lambda(n+1)=\dfrac{3(n+1)}{m^2+(n+1)^2}$。
 
-\textbf{（ii）} 由题设 $k_{OR}=3k_{OP}$，即
-\[
-    \frac{y}{x}=3\cdot\frac{n}{m}.
-\]
+因此点 $R$ 的坐标为
+$\boxed{\begin{cases} x=\dfrac{3m}{m^2+(n+1)^2}, \\ y=\dfrac{3(n+1)}{m^2+(n+1)^2}-1. \end{cases}}$
+
+
+\textbf{解（2）（ii）}
+由题设 $k_{OR}=3k_{OP}$，即 $\dfrac{y}{x}=3\cdot\dfrac{n}{m}$。
 将（i）中 $x,y$ 的表达式代入上式：
-\[
-    \frac{\dfrac{3(n+1)}{m^2+(n+1)^2}-1}{\dfrac{3m}{m^2+(n+1)^2}}=\frac{3n}{m}.
-\]
+$\dfrac{\dfrac{3(n+1)}{m^2+(n+1)^2}-1}{\dfrac{3m}{m^2+(n+1)^2}}=\dfrac{3n}{m}$。
 化简分子并约去分母中的 $m^2+(n+1)^2$（注意 $m\neq0$）：
-\[
-    \frac{3(n+1)-\bigl[m^2+(n+1)^2\bigr]}{3m}=\frac{3n}{m}
-    \implies 3(n+1)-m^2-(n+1)^2=9n.
-\]
-整理得
-\[
-    m^2+(n+1)^2-3(n+1)+9n=0 \implies m^2+n^2+8n+7=0,
-\]
-配方得点 $P$ 的轨迹方程：
-\[
-    m^2+(n+4)^2=18.
-\]
+$\dfrac{3(n+1)-[m^2+(n+1)^2]}{3m}=\dfrac{3n}{m}$，
+即 $3(n+1)-m^2-(n+1)^2=9n$。
+整理得 $m^2+(n+1)^2-3(n+1)+9n=0$，即 $m^2+n^2+8n+7=0$，
+配方得点 $P$ 的轨迹方程：$m^2+(n+4)^2=18$。
 即点 $P$ 在以 $G(0,-4)$ 为圆心、半径 $r=3\sqrt{2}$ 的圆上运动。
 
 对于椭圆 $C$ 上的动点 $Q$，由三角不等式：
-\[
-
-    |PQ|\le|PG|+|GQ|=3\sqrt{2}+|GQ|.
-\]
+$|PQ|\le|PG|+|GQ|=3\sqrt{2}+|GQ|$。
 设 $Q(3\cos\theta,\,\sin\theta)$，则
-\begin{align*}
-    |GQ|^2 &= (3\cos\theta)^2+(\sin\theta+4)^2 \\
-           &= 9\cos^2\theta+\sin^2\theta+8\sin\theta+16 \\
-           &= 9(1-\sin^2\theta)+\sin^2\theta+8\sin\theta+16 \\
-           &= -8\sin^2\theta+8\sin\theta+25.
-\end{align*}
-令 $t=\sin\theta\in[-1,1]$，则 $f(t)=-8t^2+8t+25$ 是开口向下的抛物线，\\
+$|GQ|^2=(3\cos\theta)^2+(\sin\theta+4)^2$
+$=9\cos^2\theta+\sin^2\theta+8\sin\theta+16$
+$=9(1-\sin^2\theta)+\sin^2\theta+8\sin\theta+16$
+$=-8\sin^2\theta+8\sin\theta+25$。
+令 $t=\sin\theta\in[-1,1]$，则 $f(t)=-8t^2+8t+25$ 是开口向下的抛物线，
 当 $t=\dfrac{1}{2}$ 时取得最大值：
-\[
-    f\!\left(\frac{1}{2}\right)=-8\times\frac{1}{4}+8\times\frac{1}{2}+25=27 \implies |GQ|_{\max}=3\sqrt{3}.
-\]
+$f\left(\dfrac{1}{2}\right)=-8\times\dfrac{1}{4}+8\times\dfrac{1}{2}+25=27$，即 $|GQ|_{\max}=3\sqrt{3}$。
 此时 $Q$ 点坐标为 $\left(\pm\dfrac{3\sqrt{3}}{2},\,\dfrac{1}{2}\right)$，易验证存在对应的 $P$ 点使得 $P,G,Q$ 三点共线且 $G$ 在 $P,Q$ 之间（因 $G$ 在椭圆外部下方，$P$ 在更下方的圆弧上），故等号可以取到。
-综上，$|PQ|$ 的最大值为
-\[
-    \boxed{|PQ|_{\max}=3\sqrt{2}+3\sqrt{3}=3(\sqrt{2}+\sqrt{3}).}
-\]
-\end{document}
+综上，$|PQ|$ 的最大值为 $\boxed{3(\sqrt{2}+\sqrt{3})}$。
